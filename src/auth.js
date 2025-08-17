@@ -1,16 +1,9 @@
-function login(email, password, usuarios) {
-  const usuario = usuarios.find(u => u.email === email && u.password === password);
-  return !!usuario; // true si encontró, false si no
+const db = require("./db");
+
+function login(email, password) {
+  const usuario = db.findUser(email);
+  if (!usuario) return false;
+  return usuario.password === password;
 }
 
 module.exports = { login };
-
-/*
-function login(email, password, usuarios) {
-  if (!email || !password) return false;
-  const usuario = usuarios.find(
-    u => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-  );
-  return Boolean(usuario);
-}
-  */
